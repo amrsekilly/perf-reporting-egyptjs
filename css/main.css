@@ -1,0 +1,15 @@
+.main-logo {
+    position: absolute;
+    right: -50px;
+    bottom: 0px;
+    width: 150px;
+}
+
+section {
+    height: 100%;
+}
+
+.main-header {
+    background-color: #FFC807;
+    margin-bottom: 10px;
+}

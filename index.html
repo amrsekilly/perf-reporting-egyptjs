@@ -1,97 +1,263 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
 
-    <title>reveal.js</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="reveal.js/dist/reset.css" />
-    <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
-    <link rel="stylesheet" href="reveal.js/dist/theme/serif.css" id="theme" />
+  <title>reveal.js</title>
 
-    <!-- Theme used for syntax highlighted code -->
-    <link
-      rel="stylesheet"
-      href="reveal.js/plugin/highlight/monokai.css"
-      id="highlight-theme"
-    />
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section
-          data-markdown
-          data-separator="-----"
-          data-separator-vertical="---"
-        >
-          <textarea data-template>
-            # Title Page
+  <link rel="stylesheet" href="reveal.js/dist/reset.css" />
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
+  <link rel="stylesheet" href="reveal.js/dist/theme/serif.css" id="theme" />
 
-            ### Date
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme" />
+</head>
 
-            -----
-            
-            Vertical slides are separated by `- - -`
-            
-            ---
-            
-            Vertical slides are separated by `- - -` .
-            
-            ---
-            
-            Vertical slides are separated by `- - -` ..
-     
-            -----
-            
-            # title
-            ## skills
-            * one
-            * two
-            * three
-            
-            ## heading
-            8. three
-            1. one
-            1. two
-         
-            
-            -----
-            
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="main-header">
+          <h2>Field data-driven performance testing</h2>
+        </div>
+        <br>
+        <div>
+          <b>Amr Elsekilly</b>
+        </div>
+        <em>Lead Frontend Engineer at <a href="https://www.blink22.com/">Blink22</a></em>
+        <img src="assets/images/Blink22.png" alt="Blink22's Logo">
+        <h3>We are <a target="_blank" href="https://blink22.com/careers/front-end-developer">hiring</a>!</h3>
+      </section>
 
-            # Questions
+      <section>
+        <div class="main-header">
+          <h2>Outline</h2>
+        </div>
+        <ul>
+          <li class="fragment">
+            What are the types or performance testing?
+          </li>
+          <li class="fragment">
+            What's the difference between lab performance testing, synthetic performance testing, and field
+            performance testing?
+          </li>
+          <li class="fragment">
+            How can we programmatically access web vitals using the browser's APIs?
+          </li>
+          <li class="fragment">
+            How to report the web vitals from users back to our backend?
+          </li>
+          <li class="fragment">
+            Monitoring field data to analyze performance, based on what your users see.
+          </li>
+        </ul>
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
 
-            -----
+      <section>
+        <div class="main-header">
+          <h2>What are the types of performance testing?</h2>
+        </div>
+        <ul>
+          <li class="fragment">Lab data-driven performance testing</li>
+          <li class="fragment">Synthetic data-driven performance testing</li>
+          <li class="fragment">Field data-driven performance testing</li>
+        </ul>
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
 
-            ## made with
+      <section>
+        <div class="main-header">
+          <h2>Lab data-driven performance testing</h2>
+        </div>
+        <img src="assets/images//lighthouse.png" alt="lighthouse report for exsite studio">
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
 
-            #### [reveal.js](https://github.com/hakimel/reveal.js)
+      <section>
+        <div class="main-header">
+          <h2>Synthetic data-driven performance testing</h2>
+        </div>
+        <img src="assets/images/synthetic.png" alt="PageSpeed Insights analysis">
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
 
-            #### [excalidraw](https://github.com/excalidraw/excalidraw)
+      <section>
+        <div class="main-header">
+          <h2>Field data-driven performance testing</h2>
+        </div>
+        <img src="assets/images/field-perf.png" alt="Field data-driven performance testing">
 
-          </textarea>
-        </section>
-      </div>
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>How can we programmatically access web vitals using the browser's APIs?</h2>
+        </div>
+        <img class="fragment" src="assets/images/per-api.png" alt="Field data-driven performance testing browser API">
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>Calculating the FCP</h2>
+        </div>
+        <pre class="fragment"><code data-trim data-noescape>
+            new PerformanceObserver(calculateFCP).observe({
+              type: "paint",
+              buffered: true,
+            });
+          </code></pre>
+        <pre class="fragment"><code data-trim data-noescape>
+            const calculateFCP = (entryList) => {
+              const entries = entryList.getEntries() || [];
+  
+              entries.forEach((entry) => {
+                if (entry.name === "first-contentful-paint") {
+                  data.fcp = entry.startTime;
+                }
+              });
+            };
+          </code></pre>
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>Calculating the LCP</h2>
+        </div>
+        <pre class="fragment"><code data-trim data-noescape>
+            new PerformanceObserver(calculateLCP).observe({
+              type: "largest-contentful-paint",
+              buffered: true,
+            });
+          </code></pre>
+        <pre class="fragment"><code data-trim data-noescape>
+            const calculateLCP = (entryList) => {
+              const entries = entryList.getEntries() || [];
+  
+              entries.forEach((entry) => {
+                if (entry.startTime > data.lcp) {
+                  data.lcp = entry.startTime;
+                }
+              });
+            };
+          </code></pre>
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>Calculating the CLS</h2>
+        </div>
+        <pre class="fragment"><code data-trim data-noescape>
+            new PerformanceObserver(calculateCLS).observe({
+              type: "layout-shift",
+              buffered: true,
+            });
+          </code></pre>
+        <pre class="fragment"><code data-trim data-noescape>
+            const calculateCLS = (entryList) => {
+              const entries = entryList.getEntries() || [];
+  
+              entries.forEach((entry) => {
+                if (!entry.hadRecentInput) {
+                  data.cls += entry.value;
+                }
+              });
+            };
+          </code></pre>
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>Calculating the FID</h2>
+        </div>
+        <pre class="fragment"><code data-trim data-noescape>
+            new PerformanceObserver(calculateFID).observe({
+              type: "first-input",
+              buffered: true,
+            });
+          </code></pre>
+        <pre class="fragment"><code data-trim data-noescape>
+            const calculateFID = (entryList) => {
+              const entries = entryList.getEntries() || [];
+  
+              entries.forEach((entry) => {
+                  data.fid = entry.processingStart - entry.startTime;
+              });
+            };
+          </code></pre>
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+
+      <section>
+        <div class="main-header">
+          <h2>How to report the web vitals from users back to our backend?</h2>
+        </div>
+        <img src="assets/images/server.png" alt="Field data-driven performance testing browser API">
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+      <section>
+        <div class="main-header">
+          <h2>Sending a beacon</h2>
+        </div>
+        <pre class="fragment"><code data-trim data-noescape>
+            document.addEventListener("visibilitychange",
+              function logData() {
+                if (document.visibilityState === "hidden") {
+                  data.createdAt = new Date().toISOString();
+                  const payload = JSON.stringify(data);
+                  navigator.sendBeacon(perfURI, payload);
+                }
+            });
+          </code></pre>
+
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
+
+
+      <section>
+        <div class="main-header">
+          <h2>Interactive Demo time</h2>
+        </div>
+        <img src="assets/images/qr-exsite.png" width="350" alt="Exsite Studio's URL">
+        <h2><a href="https://exsitestudio.com/">ExsiteStudio.com</a></h2>
+
+        <img src="assets/images/main_logo.png" class="main-logo" alt="Blink22's Logo">
+      </section>
     </div>
+  </div>
 
-    <script src="reveal.js/dist/reveal.js"></script>
-    <script src="reveal.js/plugin/notes/notes.js"></script>
-    <script src="reveal.js/plugin/markdown/markdown.js"></script>
-    <script src="reveal.js/plugin/highlight/highlight.js"></script>
-    <script src="reveal.js/plugin/zoom/zoom.js"></script>
-    <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
+  <script src="reveal.js/dist/reveal.js"></script>
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+  <script src="reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="reveal.js/plugin/zoom/zoom.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
 
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
-      });
-    </script>
-  </body>
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+    });
+  </script>
+</body>
+
 </html>
